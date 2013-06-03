@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no;" />
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+ 
+    <!-- include jquery mobile -->
+    <link rel="stylesheet" href="jquery/jquery.mobile-1.0b2.min.css" />
+    <script src="jquery/jquery-1.6.2.min.js"></script>
+    <script src="jquery/jquery.mobile-1.0b2.min.js"></script>
+        
+    <!-- include phonegap / callback -->
+	<script type="text/javascript" charset="utf-8" src="phonegap-1.2.0.js"></script>
+    <!-- required for oauth plugin support -->    
+    <script type="text/javascript" src="SalesforceOAuthPlugin.js"></script>
+
+    <!-- include forcetk for REST transaction support -->
+    <script src="forcetk.js"></script>
+    
+    <!-- include local utility functionality -->
+    <link rel="stylesheet" href="css/global.css" />	
+    <link rel="stylesheet" type="text/css" href="SFHybridApp.css" />
+    <script type="text/javascript" charset="utf-8" src="SFHybridApp.js"></script>
+    
+     <!-- Screen specific js-->
+     <script type="text/javascript" src="js/index.js"></script>
+     <script type="text/javascript" src="js/claims.js"></script>
+     <script type="text/javascript" src="js/commonUtils.js"></script>
+     <script type="text/javascript" src="js/navigationComponent.js"></script>
+     <script type="text/javascript" src="js/requestHelper.js"></script>
+     <script type="text/javascript" src="js/claimDetails.js"></script>
+     
+	 
+
+    <script type="text/javascript" charset="utf-8">
+
+    
+    // The version of the REST API you wish to use in your app.
+    var apiVersion = "v23.0";
+  //Initialize Automobins name space
+    
+	// If you want to prevent dragging, uncomment this section
+	/*
+	function preventBehavior(e) 
+	{ 
+      e.preventDefault(); 
+    };
+	document.addEventListener("touchmove", preventBehavior, false);
+	*/
+	
+	/* If you are supporting your own protocol, the var invokeString will contain any arguments to the app launch.
+	see http://iphonedevelopertips.com/cocoa/launching-your-own-application-via-a-custom-url-scheme.html
+	for more details -jm */
+	/*
+	function handleOpenURL(url)
+	{
+		// do something with the url passed in.
+	}
+	*/
+	
+    var forcetkClient;
+    var debugMode = true;
+
+    jQuery(document).ready(function() {
+        //Add event listeners and so forth here
+        SFHybridApp.logToConsole("onLoad: jquery ready");
+		document.addEventListener("deviceready", onDeviceReady,false);
+
+    });
+
+    // When this function is called, PhoneGap has been initialized and is ready to roll 
+    function onDeviceReady() {
+        SFHybridApp.logToConsole("onDeviceReady: PhoneGap ready");
+		//Call getAuthCredentials to get the initial session credentials
+        SalesforceOAuthPlugin.getAuthCredentials(salesforceSessionRefreshed, getAuthCredentialsError);
+
+        //register to receive notifications when autoRefreshOnForeground refreshes the sfdc session
+        document.addEventListener("salesforceSessionRefresh",salesforceSessionRefreshed,false);
+
+        //enable buttons
+        //regLinkClickHandlers();
+        
+        //back button event - Function defined in CommonUtils.js
+    	document.addEventListener("backbutton", backButtonClick , false);
+    }
+        
+
+    function salesforceSessionRefreshed(creds) {
+        SFHybridApp.logToConsole("salesforceSessionRefreshed");
+		
+        forcetkClient = new forcetk.Client(creds.clientId, creds.loginUrl);
+        forcetkClient.setSessionToken(creds.accessToken, apiVersion, creds.instanceUrl);
+        forcetkClient.setRefreshToken(creds.refreshToken);
+        forcetkClient.setUserAgentString(creds.userAgent);
+        userID = creds.userId;
+    }
+
+
+    function getAuthCredentialsError(error) {
+        SFHybridApp.logToConsole("getAuthCredentialsError: " + error);
+    }
+        
+    </script>
+        
+	<!-- load our app-specific code -->
+    <script src="contactexplorer.js"></script>       
+
+  </head>
+  <body>
+      <div id="navigation-screen-page" data-role="page" data-theme="a" data-dom-cache="true">
+		<div data-role="header">	
+			<a data-icon="delete" id="appExitId">Exit</a>
+			<h2 class="blueColor">AUTO<span class="whiteColor">MOBINS</span></h2>	
+			<img id="navRefreshID" src="res/image/refresh2.png"/>			
+		</div>		
+		<div data-role="content" >
+			<div class="navigationMainDiv">								
+				<div class="meterContainer">
+					<div class="meterUsed"></div>
+					<div class="meterAvailable"></div>
+				</div>	
+				<div class="ui-grid-a" style="font-size:12px;font-weight:bold;margin-top:10px;width:90%;margin-left: auto;margin-right: auto;">					
+					<div class="ui-block-a" style="text-align:left;">
+						Today's Status
+					</div>
+					<div class="ui-block-b" style="text-align:right;">
+						<span id="navClaimCountID">loading...</span>
+					</div>				
+				</div>				
+			</div>	
+			<div class="ui-grid-a navigationMenuContainer">					
+				<div class="ui-block-a">
+					<a target="_blank" href="" id="navigation_all_claims_id">
+						<div class="navigationMenuAllClaimsImage navigationMenuImgCenter navigationMenuImageSizePosition" width="100%"></div>
+					</a>
+					<div class="navigationImgdesc">All Claims</div>
+				</div>
+				<div class="ui-block-b">
+					<a target="_blank" href="" id="navigation_today_claims_id">
+						<div class="navigationMenuMyClaimsImage navigationMenuImgCenter navigationMenuImageSizePosition" width="100%"></div>
+					</a>
+					<div class="navigationImgdesc">Todays Task</div>
+				</div>				
+				
+				<div class="ui-block-a">
+					<a target="_blank" href="" id="navigation_contact_id">
+						<div class="navigationMenuContactImage navigationMenuImgCenter navigationMenuImageSizePosition" width="100%"></div>
+					</a>
+					<div class="navigationImgdesc">Contact Us</div>
+				</div>
+				<div class="ui-block-b">
+					<a target="_blank" href="" id="navigation_about_id">
+						<div class="navigationMenuAboutImage navigationMenuImgCenter navigationMenuImageSizePosition" width="100%"></div>
+					</a>
+					<div class="navigationImgdesc">About</div>
+				</div>									
+			</div>			
+		</div>	
+		<div data-role="footer" style="text-align:center;bottom:0px;position:absolute">	
+			<span class="footerStyle">Copyright 2013 Automobins</span>
+		</div>		
+	</div> 
+  </body>
+</html>

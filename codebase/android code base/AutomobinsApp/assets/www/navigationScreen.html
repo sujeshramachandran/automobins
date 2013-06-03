@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Automobins</title>
+    <link rel="stylesheet" href="css/jquery.mobile-1.0.css" />
+    <link rel="stylesheet" href="css/global.css" />	
+	<!-- libs-->
+		<script type="text/javascript" src="js/libs/jquery.min.js"></script>
+    <script type="text/javascript" src="js/libs/jquery-1.7.js"></script>
+	<script type="text/javascript" src="js/libs/jquery.mockjax.js"></script>
+
+    <!-- Common -->
+  <script type="text/javascript" src="js/common/initApplication.js"></script>
+  <script type="text/javascript" src="js/common/commonUtils.js"></script>
+  <script type="text/javascript" src="js/common/mockHandler.js"></script>
+  <script type="text/javascript" src="js/common/navigationComponent.js"></script>
+  <script type="text/javascript" src="js/common/requestHandler.js"></script>
+  <script type="text/javascript" src="js/common/sessionManagement.js"></script>
+
+    <!-- Screen specific js-->
+	<script type="text/javascript" src="js/navigationScreen.js"></script>
+
+    <!-- jQuery mobile and Phonegap -->
+    <script type="text/javascript" src="js/libs/jquery.mobile-1.0.js"></script>	
+
+</head>
+<body>
+    <div id="navigation-screen-page" data-role="page" data-theme="a" data-dom-cache="true">
+		<div data-role="header">	
+			<a data-icon="exit" data-rel="back">Exit</a>
+			<h2 class="blueColor">AUTO<span class="whiteColor">MOBINS</span></h2>					
+		</div>		
+		<div data-role="content" >
+			<div class="navigationMainDiv">								
+				<div class="meterContainer">
+					<div class="meterUsed"></div>
+					<div class="meterAvailable"></div>
+				</div>	
+				<div class="ui-grid-a" style="font-size:12px;font-weight:bold;margin-top:10px;width:90%;margin-left: auto;margin-right: auto;">					
+					<div class="ui-block-a" style="text-align:left;">
+						Today's Status
+					</div>
+					<div class="ui-block-b" style="text-align:right;">
+						7 of 10
+					</div>				
+				</div>				
+			</div>	
+			<div class="ui-grid-a navigationMenuContainer">					
+				<div class="ui-block-a">
+					<a target="_blank" href="">
+						<div class="navigationMenuAllClaimsImage navigationMenuImgCenter navigationMenuImageSizePosition" width="100%"></div>
+					</a>
+					<div class="navigationImgdesc">All Claims</div>
+				</div>
+				<div class="ui-block-b">
+					<a target="_blank" href="">
+						<div class="navigationMenuMyClaimsImage navigationMenuImgCenter navigationMenuImageSizePosition" width="100%"></div>
+					</a>
+					<div class="navigationImgdesc">Todays Task</div>
+				</div>				
+				
+				<div class="ui-block-a">
+					<a target="_blank" href="">
+						<div class="navigationMenuContactImage navigationMenuImgCenter navigationMenuImageSizePosition" width="100%"></div>
+					</a>
+					<div class="navigationImgdesc">Contact Us</div>
+				</div>
+				<div class="ui-block-b">
+					<a target="_blank" href="">
+						<div class="navigationMenuAboutImage navigationMenuImgCenter navigationMenuImageSizePosition" width="100%"></div>
+					</a>
+					<div class="navigationImgdesc">About</div>
+				</div>									
+			</div>			
+		</div>	
+		<div data-role="footer" style="text-align:center;bottom:0px;position:absolute">	
+			<span class="footerStyle">Copyright 2013 Automobins</span>
+		</div>		
+	</div>
+</body>
+</html>
+
+

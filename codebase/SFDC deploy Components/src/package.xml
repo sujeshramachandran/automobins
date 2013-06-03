@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Package xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Automobins</fullName>
+    <types>
+        <members>ClaimMaster__c.Actual_Completion_Date__c</members>
+        <members>ClaimMaster__c.AssignedDate__c</members>
+        <members>ClaimMaster__c.Assignment_Status__c</members>
+        <members>ClaimMaster__c.ExecutiveMaster__c</members>
+        <members>ClaimMaster__c.Executive_Comment__c</members>
+        <members>ClaimMaster__c.Expected_Completion_Date__c</members>
+        <members>ClaimMaster__c.Image_ID__c</members>
+        <members>ClaimMaster__c.Image__c</members>
+        <members>ClaimMaster__c.Incident_Date__c</members>
+        <members>ClaimMaster__c.Incident_Location__c</members>
+        <members>ClaimMaster__c.InsuranceMaster__c</members>
+        <members>ExecutiveMaster__c.Phone__c</members>
+        <members>ExecutiveMaster__c.User__c</members>
+        <members>InsuranceMaster__c.Amount__c</members>
+        <members>InsuranceMaster__c.Contact__c</members>
+        <members>InsuranceMaster__c.Expiry_Date__c</members>
+        <members>InsuranceMaster__c.Issue_Date__c</members>
+        <members>InsuranceMaster__c.VehicleTypeMaster__c</members>
+        <members>InsuranceMaster__c.Vehicle_Model__c</members>
+        <members>InsuranceMaster__c.Vehicle_No__c</members>
+        <members>VehicleTypeMaster__c.Type__c</members>
+        <name>CustomField</name>
+    </types>
+    <types>
+        <members>ClaimMaster__c</members>
+        <members>ExecutiveMaster__c</members>
+        <members>InsuranceMaster__c</members>
+        <members>VehicleTypeMaster__c</members>
+        <name>CustomObject</name>
+    </types>
+    <types>
+        <members>ClaimMaster__c-ClaimMaster Layout</members>
+        <members>ExecutiveMaster__c-ExecutiveMaster Layout</members>
+        <members>InsuranceMaster__c-InsuranceMaster Layout</members>
+        <members>VehicleTypeMaster__c-VehicleTypeMaster Layout</members>
+        <name>Layout</name>
+    </types>
+    <types>
+        <members>ClaimMaster__c.All</members>
+        <members>ExecutiveMaster__c.All</members>
+        <members>InsuranceMaster__c.All</members>
+        <members>VehicleTypeMaster__c.All</members>
+        <name>ListView</name>
+    </types>
+    <version>23.0</version>
+</Package>
